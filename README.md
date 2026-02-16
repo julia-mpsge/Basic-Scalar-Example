@@ -303,7 +303,7 @@ The unit cost function for the top-level nest `s` combines the composite good `v
 cost\_X = \left(\frac{20}{120} \cdot cost\_X\_PY^{(1-0.5)} + \frac{100}{120} \cdot cost\_X\_va^{(1-0.5)}\right)^{\frac{1}{1-0.5}}
 ```
 
-where $cost\_X\_PY = PY$ as there are no taxes on good `PY`.
+where $`cost\_X\_PY = PY`$ as there are no taxes on good `PY`.
 
 Finally, there is only a single output commodity `PX`. Thus, the unit cost function on the output side, which we will call revenue, is simply given by:
 
