@@ -1,5 +1,7 @@
 # Basic Structure of a Scalar MPSGE.jl model 
 
+This example will create a model three ways: in MPSGE/GAMS, in MPSGE.jl, and as an explicit algebraic MCP using JuMP.jl. This example will assume that you are familiar with MPSGE/GAMS syntax and are interested in experimenting with Julia. The MPSGE.jl syntax is designed to mirror the MPSGE/GAMS syntax as closely as possible, so if you are familiar with MPSGE/GAMS, you should be able to understand MPSGE.jl with ease.
+
 There are four components to constructing a model in MPSGE: 
 
 1. Declare parameters and variables. Variables are: sectors, commodities, consumers, and auxiliary variables. 
