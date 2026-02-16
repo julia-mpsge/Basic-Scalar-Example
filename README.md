@@ -28,7 +28,7 @@ The total value of good `PX` purchased by sector `X` is $120\cdot PX\cdot X$, wh
 
 This example is a scalar model, meaning no sets or indices are used. This simplifies the model and allows us to focus on the structure and the syntax of MPSGE. However, MPSGE can also be used to create indexed models, which are more common in practice, this will be covered in a future example.
 
-This is a slightly modified version of model `M22` from [Jim Markusen's MPSGE tutorial](https://mpsge.org/tutorial.pdf). The code for these examples can be found in THIS REPOSITORY.
+This is a slightly modified version of model `M22` from [Jim Markusen's MPSGE tutorial](https://mpsge.org/tutorial.pdf). The code for these examples can be found in the `src` directory. Be sure to activate the Julia environment.
 
 ## Preamble
 
