@@ -277,51 +277,51 @@ We now turn our attention to constructing the algebraic version of the cost func
 
 We are going to create the unit cost functions for each node of the tree, starting with the leaves and working our way up to the root. The unit cost functions for the leaves are simply the tax-adjusted prices of each commodity. In general, the tax-adjusted price for a commodity $P$ with taxes $t_i$ and reference price $rp$ is given by:
 
-$$
+```math
 \frac{P\cdot (1 \pm \sum_i t_i)}{rp}
-$$
+```
 
 Where the sign is positive for inputs and negative for outputs.
 
 The unit cost functions for `PL` and `PK` are given by:
-$$
+```math
 \begin{align*}
 cost\_X\_va\_PL &= PL \cdot (1 + TX\_PL) \\
 cost\_X\_va\_PK &= PK \cdot (1 + TX\_PK)
 \end{align*}
-$$
+```
 
 Using these we can construct the unit cost function for the composite good `va`, which combines `PL` and `PK` with an elasticity of substitution of `1`, or a Cobb-Douglas functional form. The unit cost function for the composite good `va` is given by:
 
-$$
+```math
 cost\_X\_va = cost\_X\_va\_PL^{(40/100)} \cdot cost\_X\_va\_PK^{(60/100)}
-$$
+```
 
 The unit cost function for the top-level nest `s` combines the composite good `va` and the input good `PY` with an elasticity of substitution of `0.5`. Thus, we use a CES functional form to create the unit cost function:
 
-$$
+```math
 cost\_X = \left(\frac{20}{120} \cdot cost\_X\_PY^{(1-0.5)} + \frac{100}{120} \cdot cost\_X\_va^{(1-0.5)}\right)^{\frac{1}{1-0.5}}
-$$
+```
 
 where $cost\_X\_PY = PY$ as there are no taxes on good `PY`.
 
 Finally, there is only a single output commodity `PX`. Thus, the unit cost function on the output side, which we will call revenue, is simply given by:
 
-$$
+```math
 revenue\_X = PX
-$$
+```
 
 The total profit for the sector `X` is the difference between total revenue and total cost. To get total cost, we multiply the unit cost by the quantity, in this case `120`. Note that the quantity is the reference quantity multiplied by the reference price. A future example will fully detail reference prices. The profit function for sector `X` is given by:
 
-$$
+```math
 profit\_X = 120 \cdot revenue\_X - 120 \cdot cost\_X
-$$
+```
 
 And the zero profit constraint is:
 
-$$
+```math
 -profit\_X = 0 \perp  X
-$$
+```
 
 This is all translated into Julia JuMP syntax as follows:
 
@@ -449,26 +449,26 @@ The algebraic JuMP version is more complicated as it requires us to compute the 
 
 The tax revenue from the tax good `PL` in sector `X` can be expressed mathematically as:
 
-$$
+```math
 \begin{align*}
 tax\_X\_PL = & 40\cdot TX\_PL\cdot X\cdot PL\cdot \frac{\partial(profit\_X)}{\partial (cost\_X\_va\_PL)} \\
 =&40\cdot TX\_PL\cdot X\cdot PL\cdot \left(\frac{cost\_X}{cost\_X\_va}\right)^{.5}\cdot \left(\frac{cost\_X\_va}{cost\_X\_va\_PL}\right)
 \end{align*}
-$$
+```
 
 We leave the computation of the partial derivative as an exercise for the reader.
 
 We similarly define `tax_X_PK` for the tax from sector `X` on good `PK`. The total income for consumer `CONS` is given by:
 
-$$
+```math
 income = 100\cdot PL + 100\cdot PK + tax\_X\_PL + tax\_X\_PK
-$$
+```
 
 Finally, the income balance constraint is given by:
 
-$$
+```math
 CONS - income = 0 \perp CONS
-$$
+```
 
 Which in JuMP syntax is:
 
@@ -487,9 +487,9 @@ From an MPSGE perspective, the model is fully specified at this point. MPSGE aut
 
 The market clearance condition for a given commodity `P` over sectors $S_i$ is given by:
 
-$$
+```math
 \sum_{i} S_i\cdot \left( \frac{\partial( profit\_S_{i})}{\partial \bar{P}} \right)  + \sum endowments - \sum final\_demands  = 0 \perp P
-$$
+```
 
 where $\bar{P}$ is the tax adjusted price of `P` and the partial derivative is given by Hotelling's lemma, as before. The market clearance conditions for each commodity are shown below in JuMP syntax:
 
